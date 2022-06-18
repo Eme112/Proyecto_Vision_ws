@@ -1,8 +1,0 @@
-prefix=/home/emerico/Documents/ProyectoVision/ProyectoFinal_ws/install
-
-Name: crane_x7_control
-Description: Description of crane_x7_control
-Version: 2.0.0
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib 
-Requires: roscpp hardware_interface transmission_interface controller_manager dynamixel_sdk

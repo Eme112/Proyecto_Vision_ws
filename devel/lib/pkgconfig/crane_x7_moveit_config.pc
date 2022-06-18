@@ -1,8 +1,0 @@
-prefix=/home/emerico/Documents/ProyectoVision/ProyectoFinal_ws/devel
-
-Name: crane_x7_moveit_config
-Description: Description of crane_x7_moveit_config
-Version: 2.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

@@ -1,8 +1,0 @@
-prefix=/home/emerico/Documents/ProyectoVision/ProyectoFinal_ws/install
-
-Name: crane_x7_examples
-Description: Description of crane_x7_examples
-Version: 2.0.0
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib 
-Requires: message_runtime
