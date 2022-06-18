@@ -1,0 +1,20 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~return_delay_time" : \b [int] Return Delay time min: 0, default: 0, max: 254
+- \b "~drive_mode" : \b [int] Drive Mode min: 0, default: 0, max: 1
+- \b "~operation_mode" : \b [int] Operating Mode min: 0, default: 3, max: 5
+- \b "~moving_threshold" : \b [int] Moving Threshold min: 10, default: 0, max: 1023
+- \b "~homing_offset" : \b [int] Homing Offset min: -1044479, default: 0, max: 1044479
+- \b "~temprature_limit" : \b [int] Temprature Limit min: 0, default: 80, max: 100
+- \b "~max_vol_limit" : \b [int] Max Voltage Limit min: 95, default: 160, max: 160
+- \b "~min_vol_limit" : \b [int] Min Voltage Limit min: 95, default: 95, max: 160
+- \b "~current_limit" : \b [int] Current Limit min: 0, default: 1193, max: 1193
+- \b "~torque_enable" : \b [bool] Torque Enable min: False, default: True, max: True
+- \b "~velocity_i_gain" : \b [int] Velocity I Gain min: 0, default: 1920, max: 16383
+- \b "~velocity_p_gain" : \b [int] Velocity P Gain min: 0, default: 100, max: 16383
+- \b "~position_d_gain" : \b [int] Position D Gain min: 0, default: 0, max: 16383
+- \b "~position_i_gain" : \b [int] Position I Gain min: 0, default: 0, max: 16383
+- \b "~position_p_gain" : \b [int] Position P Gain min: 0, default: 800, max: 16383
+

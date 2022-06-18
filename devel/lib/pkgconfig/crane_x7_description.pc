@@ -1,0 +1,8 @@
+prefix=/home/emerico/Documents/ProyectoVision/ProyectoFinal_ws/devel
+
+Name: crane_x7_description
+Description: Description of crane_x7_description
+Version: 1.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

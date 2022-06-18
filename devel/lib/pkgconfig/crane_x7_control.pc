@@ -1,0 +1,8 @@
+prefix=/home/emerico/Documents/ProyectoVision/ProyectoFinal_ws/devel
+
+Name: crane_x7_control
+Description: Description of crane_x7_control
+Version: 2.0.0
+Cflags: -I/home/emerico/Documents/ProyectoVision/ProyectoFinal_ws/src/crane_x7_ros/crane_x7_control/include
+Libs: -L${prefix}/lib 
+Requires: roscpp hardware_interface transmission_interface controller_manager dynamixel_sdk

@@ -1,0 +1,2 @@
+crane_x7_description:crane_x7_ros/crane_x7:crane_x7_ros/crane_x7_bringup:crane_x7_ros/crane_x7_control:crane_x7_ros/crane_x7_examples:crane_x7_ros/crane_x7_gazebo:crane_x7_ros/crane_x7_moveit_config:crane_x7_ros/crane_x7_msgs:object_detection
+-DCATKIN_DEVEL_PREFIX=/home/emerico/Documents/ProyectoVision/ProyectoFinal_ws/devel -DCMAKE_INSTALL_PREFIX=/home/emerico/Documents/ProyectoVision/ProyectoFinal_ws/install -G Unix Makefiles

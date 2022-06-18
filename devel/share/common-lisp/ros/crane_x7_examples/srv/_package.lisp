@@ -1,0 +1,10 @@
+(cl:defpackage crane_x7_examples-srv
+  (:use )
+  (:export
+   "OBSTACLEAVOIDANCE"
+   "<OBSTACLEAVOIDANCE-REQUEST>"
+   "OBSTACLEAVOIDANCE-REQUEST"
+   "<OBSTACLEAVOIDANCE-RESPONSE>"
+   "OBSTACLEAVOIDANCE-RESPONSE"
+  ))
+

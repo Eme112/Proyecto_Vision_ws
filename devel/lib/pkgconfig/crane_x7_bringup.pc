@@ -1,0 +1,8 @@
+prefix=/home/emerico/Documents/ProyectoVision/ProyectoFinal_ws/devel
+
+Name: crane_x7_bringup
+Description: Description of crane_x7_bringup
+Version: 2.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

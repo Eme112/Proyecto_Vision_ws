@@ -1,0 +1,21 @@
+\subsubsection usage Usage
+\verbatim
+<node name="crane_x7_msgs" pkg="crane_x7_msgs" type="crane_x7_msgs">
+  <param name="return_delay_time" type="int" value="0" />
+  <param name="drive_mode" type="int" value="0" />
+  <param name="operation_mode" type="int" value="3" />
+  <param name="moving_threshold" type="int" value="0" />
+  <param name="homing_offset" type="int" value="0" />
+  <param name="temprature_limit" type="int" value="80" />
+  <param name="max_vol_limit" type="int" value="160" />
+  <param name="min_vol_limit" type="int" value="95" />
+  <param name="current_limit" type="int" value="1193" />
+  <param name="torque_enable" type="bool" value="True" />
+  <param name="velocity_i_gain" type="int" value="1920" />
+  <param name="velocity_p_gain" type="int" value="100" />
+  <param name="position_d_gain" type="int" value="0" />
+  <param name="position_i_gain" type="int" value="0" />
+  <param name="position_p_gain" type="int" value="800" />
+</node>
+\endverbatim
+

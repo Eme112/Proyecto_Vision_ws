@@ -1,0 +1,20 @@
+#Folders and files to ignore
+__ignore__/
+
+### ROS ###
+/ProyectoFinal_ws/devel/
+/ProyectoFinal_ws/devel_isolated/
+/ProyectoFinal_ws/logs/
+/ProyectoFinal_ws/build/
+/ProyectoFinal_ws/build_isolated/
+/ProyectoFinal_ws/bin/
+/ProyectoFinal_ws/install/
+/ProyectoFinal_ws/.catkin_tools/
+/ProyectoFinal_ws/.catkin_workspace
+/ProyectoFinal_ws/src/ExternalPackages/
+/ProyectoFinal_ws/src/.rosinstall.bak
+
+### Others ###
+*.DS_Store
+*.pyc
+.vscode/
