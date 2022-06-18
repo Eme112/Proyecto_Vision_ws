@@ -24,6 +24,19 @@
     <arg name="use_effort_gripper" value="$(arg use_effort_gripper)" />
   </include>
 
+  <node 
+    pkg="tf" 
+    type="static_transform_publisher" 
+    name="camera_broadcaster" 
+    args="0 0.6 2.0 0 180 0 1 world camera_link 20" 
+  />
+  <!-- <node 
+    pkg="tf" 
+    type="static_transform_publisher" 
+    name="arm_broadcaster" 
+    args="0 0 1.02 0 0 0 1 world base_link 20" 
+  /> -->
+
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find crane_x7_gazebo)/worlds/table.world"/>
     <arg name="debug" value="$(arg gazebo_debug)" />
@@ -39,7 +52,7 @@
     />
  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-        args="-urdf -model crane_x7 -param robot_description -z 1.02"/>
+        args="-urdf -model crane_x7 -param robot_description -Y -1.57"/>
 
   <include file="$(find crane_x7_moveit_config)/launch/demo.launch">
     <arg name="use_gazebo" default="true" />

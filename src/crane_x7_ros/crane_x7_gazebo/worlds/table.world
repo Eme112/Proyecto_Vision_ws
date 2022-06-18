@@ -31,7 +31,7 @@
         <uri>model://kinect_ros</uri>
       </include>
 
-      <pose>1.0 0 2.0 0 1.0 3.15</pose>
+      <pose>0.6 0 2.0 0 1.57 3.15</pose>
     </model>
 
     <model name="ground_plane">

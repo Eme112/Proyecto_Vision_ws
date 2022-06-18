@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <arg name="rviz"  default="false"/>
+
+  <!-- Pick & place server -->
+  <node name="pick_and_place_server" pkg="object_manipulation" type="pick_and_place_server.py" output="screen">
+      <rosparam command="load" file="$(find object_manipulation)/config/pick_and_place_params.yaml" />
+  </node>
+
+  <node name="manipulation_server" pkg="object_manipulation" type="manipulationServer.py" output="screen" />
+
+</launch>

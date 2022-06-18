@@ -17,8 +17,12 @@
   <link name="world"/>
 
   <joint name="base_link_to_world_joint" type="fixed">
+    <origin
+      xyz="0 0 1.02"
+      rpy="0 0 0" />
     <parent link="world"/>
     <child link="base_link"/>
+    <axis xyz="0 0 0" />
   </joint>
 
   <xacro:arg name="use_effort_gripper" default="false" />
@@ -43,6 +47,6 @@
               shoulder_ulimit="2.97132"
               logos_definition="crane_x7_rt_logos.xacro"
               use_effort_gripper="$(arg use_effort_gripper)">
-    <origin xyz="0 0 0"/>
+    <origin xyz="0 0 0" rpy="0 0 0" />
   </xacro:crane_x7>
 </robot>

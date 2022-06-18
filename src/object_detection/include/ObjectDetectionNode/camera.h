@@ -7,21 +7,24 @@
 #include <tf2_ros/transform_listener.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 #include <sensor_msgs/PointCloud2.h>
+#include <geometry_msgs/Pose.h>
 
 
 class Camera {
+  ros::Subscriber camera_sub_;
+  ros::Subscriber point_cloud_sub_;
+  cv::Point2f box_centroid;
+  tf2_ros::Buffer tf_buffer;
+  tf2_ros::TransformListener listener_;
+  ros::Publisher pose_pub_;
+
  public:
-  Camera(ros::NodeHandle& n) : it_(n) {
-    camera_sub_ = it_.subscribe("/camera/color/image_raw", 1, 
-      &Camera::camera_callback, this);
-    image_pub_ = it_.advertise("/object_detector/output_video", 1);
+  Camera(ros::NodeHandle& n) : listener_(tf_buffer) {
+    camera_sub_ = n.subscribe("/camera/color/image_raw", 1, &Camera::camera_callback, this);
     // Subscribe to the /camera PointCloud2 topic. CAMBIO
-    point_cloud_sub_ = it.subscribe("/camera/depth/points", 1,
-      &Camera::point_cloud_cb, this);
+    point_cloud_sub_ = n.subscribe("/camera/depth/points", 1, &Camera::point_cloud_cb, this);
+    pose_pub_ = n.advertise<geometry_msgs::PoseStamped>("/test/objectpose", 10);
     ROS_INFO("Subscriber initialized!");
-    // Creation of tf_buffer object and listener
-    tf2_ros::Buffer tf_buffer;
-    tf2_ros::TransformListener listener(tf_buffer);
   }
  private:
 
@@ -49,17 +52,25 @@ class Camera {
 
   void point_cloud_cb(const sensor_msgs::PointCloud2& pCloud) {
  
-    geometry_msgs::Point box_position_camera_frame;
-    pixel_to_3d_point(pCloud, box_centroid.x, box_centroid.y, box_position_camera_frame);
+    geometry_msgs::Point box_position_point;
+    pixel_to_3d_point(pCloud, box_centroid.x, box_centroid.y, box_position_point);
  
-    geometry_msgs::Point target_position_camera_frame;
-    pixel_to_3d_point(pCloud, target_centroid.x, target_centroid.y, target_position_camera_frame);
+    geometry_msgs::Point target_position_camera_frame = box_position_point;
+    target_position_camera_frame.x += 0.2;
+    target_position_camera_frame.z += 0.05;
 
-    box_position_base_frame = transform_between_frames(box_position_camera_frame, from_frame, to_frame);
-    target_position_base_frame = transform_between_frames(target_position_camera_frame, from_frame, to_frame);
- 
-    ROS_INFO_STREAM("3d box position base frame: x " << box_position_base_frame.x << " y " << box_position_base_frame.y << " z " << box_position_base_frame.z);
-    ROS_INFO_STREAM("3d target position base frame: x " << target_position_base_frame.x << " y " << target_position_base_frame.y << " z " << target_position_base_frame.z);
+    box_position_point = transform_between_frames(box_position_point, "camera_link", "world");
+
+    geometry_msgs::PoseStamped object_pose;
+    object_pose.header.stamp = ros::Time::now();
+    object_pose.header.frame_id = "world";
+    object_pose.pose.position = box_position_point;
+    object_pose.pose.orientation.x = 0;
+    object_pose.pose.orientation.y = 0;
+    object_pose.pose.orientation.z = 0;
+    object_pose.pose.orientation.w = 1;
+    pose_pub_.publish(object_pose);
+    // ROS_INFO_STREAM("3d box position base frame: x " << box_position_point.x << " y " << box_position_point.y << " z " << box_position_point.z);
   }
 
   void pixel_to_3d_point(const sensor_msgs::PointCloud2 pCloud, const int u, const int v, geometry_msgs::Point &p) {
@@ -148,27 +159,16 @@ class Camera {
     cv::Mat drawing(canny_output.size(), CV_8UC3, cv::Scalar(255,255,255));
     
     for( int i = 0; i<contours.size(); i++ ) {
-    cv::Scalar color = cv::Scalar(167,151,0); // B G R values
-    cv::drawContours(drawing, contours, i, color, 2, 8, hierarchy, 0, cv::Point());
-    cv::circle( drawing, mc[i], 4, color, -1, 8, 0 );
+      cv::Scalar color = cv::Scalar(167,151,0); // B G R values
+      cv::drawContours(drawing, contours, i, color, 2, 8, hierarchy, 0, cv::Point());
+      cv::circle( drawing, mc[i], 4, color, -1, 8, 0 );
     }
 
     // showImage(drawing);
 
     //get box location in 2d image
-    cv::Rect box_search_area((image_size_x/2), 0, (image_size_x/2), 255);
-    cv::Point2f box_centroid = search_centroid_in_area(centroids, box_search_area);
-    
-    //get plate location in 2d image
-    cv::Rect target_search_area(0, 0, (image_size_x/2), 255);
-    cv::Point2f target_centroid = search_centroid_in_area(centroids, target_search_area);
+    cv::Rect box_search_area(0, 0, image_size_x, image_size_y);
+    box_centroid = search_centroid_in_area(centroids, box_search_area);
 
-    image_pub_.publish(cv_ptr->toImageMsg());
   }
-
-  image_transport::ImageTransport it_;
-
-  image_transport::Publisher image_pub_;
-  image_transport::Subscriber camera_sub_;
-  ros::Subscriber point_cloud_sub_;
 };
